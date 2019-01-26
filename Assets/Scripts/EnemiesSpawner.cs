@@ -23,7 +23,7 @@ public class EnemiesSpawner : MonoBehaviour
         {
             CurrentCooldown = Cooldown;
             int Nr = Random.Range(0, Enemies.Length);
-            Vector3 SpawnLocation = new Vector3(Random.Range (-10, 10), Random.Range(-4, 4), 0);
+            Vector3 SpawnLocation = new Vector3(Random.Range (-20, 20), Random.Range(-10, 10), 0);
             Instantiate(Enemies[Nr], SpawnLocation, Quaternion.identity);
         }
     }

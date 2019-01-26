@@ -5,27 +5,26 @@ using UnityEngine;
 public class TreeController : MonoBehaviour
 {
     public int Owner = 0;
-    public Sprite TreeSprite;
 
     public Color EnemyControlledColor;
     public Color NeutralColor;
     public Color PlayerControlledColor;
 
-    public void ChangeColor (int Nr)
+    void OnTriggerEnter2D (Collider2D col)
     {
-        Owner = Nr;
+        string Tag = col.tag;
+        Debug.Log (Tag);
 
         /// Change sprites?
-        switch (Nr)
+        switch (Tag)
         {
-            case -1:
+            case "Enemy":
                 gameObject.GetComponent<SpriteRenderer>().color = EnemyControlledColor;
+                Owner = -1;
                 break;
-            case 0:
-                gameObject.GetComponent<SpriteRenderer>().color = NeutralColor;
-                break;
-            case 1:
+            case "Player":
                 gameObject.GetComponent<SpriteRenderer>().color = PlayerControlledColor;
+                Owner = 1;
                 break;
         }
     }
