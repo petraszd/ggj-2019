@@ -5,6 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class GirlController : MonoBehaviour
 {
+    public delegate void EventGirlInstance(GirlController girl);
+    public static event EventGirlInstance OnGirlInstance;
+
     private PathManager m_path;
 
     public float m_speed;
@@ -35,7 +38,8 @@ public class GirlController : MonoBehaviour
             m_previousPoint = temp;
         }
         direction.Normalize();
-        m_rigidbody.MovePosition(m_rigidbody.position + direction * m_speed);
+        Vector2 delta = direction * m_speed * Time.fixedDeltaTime;
+        m_rigidbody.MovePosition(m_rigidbody.position + delta);
     }
 
     int ChooseNewPoint()
@@ -53,6 +57,4 @@ public class GirlController : MonoBehaviour
 
         return connectedPoints[Random.Range(0, connectedPoints.Count)];
     }
-
 }
-

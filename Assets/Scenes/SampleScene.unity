@@ -112,3 +112,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+  m_Name: PlayerDog
+  m_LocalPosition: {x: -4.63, y: 2.96, z: 0}
+  m_speed: 5
+      value: 3
