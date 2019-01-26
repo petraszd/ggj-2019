@@ -341,8 +341,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_girl: {fileID: 0}
-  m_radius: 3
+  m_radius: 4
   m_speed: 4
+  m_spritesTransform: {fileID: 7356850785837936987}
 --- !u!1 &2385462377342193254
 GameObject:
   m_ObjectHideFlags: 0
