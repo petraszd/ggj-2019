@@ -3,3 +3,5 @@
 
 - Mergaitės dvigubas greitis: jeigu šuo yra jos krypties priekyje, tai
   greičiau eiti.
+
+- Geresnė mergaitės animacija
