@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerDogController : MonoBehaviour
 {
-    private static float RATIO_WHEN_RUNNING_IN = 0.5f;
+    private static float RATIO_WHEN_RUNNING_IN = 0.3f;
     private static float STAND_STILL_EPSILON = 0.2f;
 
     public GirlController m_girl = null;
@@ -15,6 +15,7 @@ public class PlayerDogController : MonoBehaviour
     private Rigidbody2D m_girlRigidbody;
     private Rigidbody2D m_rigidbody;
     private Vector2 m_target;
+    private Camera m_camera;
 
     void Awake()
     {
@@ -29,6 +30,15 @@ public class PlayerDogController : MonoBehaviour
 
         Debug.Assert(m_girl != null);
         m_girlRigidbody = m_girl.GetComponent<Rigidbody2D>();
+        m_camera = Camera.main;
+    }
+
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0)) {
+            HandlePointInput(Input.mousePosition);
+        }
+        // TODO: touch detection
     }
 
     void FixedUpdate()
@@ -44,19 +54,38 @@ public class PlayerDogController : MonoBehaviour
         }
     }
 
+    void HandlePointInput(Vector2 screenPosition)
+    {
+        Vector2 pos = m_camera.ScreenToWorldPoint(screenPosition);
+
+        if (IsWithinRadius(pos)) {
+            m_target = pos;
+        }
+    }
+
     Vector2 CalculateRealTarget()
     {
         Vector2 girlPos = m_girlRigidbody.position;
         Vector2 dogPos = m_rigidbody.position;
 
-        if (Vector2.Distance(girlPos, dogPos) > m_radius) {
+        if (!IsWithinRadius()) {
             Vector2 direction = girlPos - dogPos;
             direction.Normalize();
 
-            return girlPos - direction * (m_radius * RATIO_WHEN_RUNNING_IN);
+            return girlPos - direction * (m_radius * (1.0f - RATIO_WHEN_RUNNING_IN));
         }
 
         return m_target;
+    }
+
+    bool IsWithinRadius()
+    {
+        return IsWithinRadius(m_rigidbody.position);
+    }
+
+    bool IsWithinRadius(Vector2 position)
+    {
+        return Vector2.Distance(m_girlRigidbody.position, position) <= m_radius;
     }
 
     // Gizmos For Debuging
