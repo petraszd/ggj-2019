@@ -7,6 +7,10 @@ public class EnemiesSpawner : MonoBehaviour
     public GameObject[] Enemies;
     public float Cooldown;
     private float CurrentCooldown;
+    public int SpawnMinX_Negative;
+    public int SpawnMaxX_Positive;
+    public int SpawnMinY_Positive;
+    public int SpawnMaxY_Positive;
 
     void Start()
     {
@@ -24,8 +28,8 @@ public class EnemiesSpawner : MonoBehaviour
             CurrentCooldown = Cooldown;
             int Nr = Random.Range(0, Enemies.Length);
 
-            float X = Random.Range(-15, 15);
-            float Y = Random.Range(7, 10);
+            float X = Random.Range(SpawnMinX_Negative, SpawnMaxX_Positive);
+            float Y = Random.Range(SpawnMinY_Positive, SpawnMaxY_Positive);
 
             bool TrueOrFalse = (Random.value > 0.5f);
             if (TrueOrFalse)
