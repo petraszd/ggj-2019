@@ -5,3 +5,5 @@
   greičiau eiti.
 
 - Geresnė mergaitės animacija
+
+- Mergaitė truktelna šunuką, kai tas už ribų
