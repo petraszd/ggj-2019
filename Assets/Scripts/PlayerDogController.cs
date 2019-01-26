@@ -5,7 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerDogController : MonoBehaviour
 {
-    private static float EPSILON = 0.3f;
+    private static float RATIO_WHEN_RUNNING_IN = 0.5f;
+    private static float STAND_STILL_EPSILON = 0.2f;
 
     public GirlController m_girl = null;
     public float m_radius = 2.0f;
@@ -13,6 +14,7 @@ public class PlayerDogController : MonoBehaviour
 
     private Rigidbody2D m_girlRigidbody;
     private Rigidbody2D m_rigidbody;
+    private Vector2 m_target;
 
     void Awake()
     {
@@ -31,10 +33,15 @@ public class PlayerDogController : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector2 target = CalculateRealTarget();
-        Vector2 direction = target - m_rigidbody.position;
+        m_target = CalculateRealTarget();
+        Vector2 direction = m_target - m_rigidbody.position;
+        float distance = direction.magnitude;
+        direction.Normalize();
         Vector2 delta = direction * m_speed * Time.fixedDeltaTime;
-        m_rigidbody.MovePosition(m_rigidbody.position + delta);
+
+        if (distance > STAND_STILL_EPSILON) {
+            m_rigidbody.MovePosition(m_rigidbody.position + delta);
+        }
     }
 
     Vector2 CalculateRealTarget()
@@ -46,10 +53,10 @@ public class PlayerDogController : MonoBehaviour
             Vector2 direction = girlPos - dogPos;
             direction.Normalize();
 
-            return girlPos - direction * (m_radius - EPSILON);
+            return girlPos - direction * (m_radius * RATIO_WHEN_RUNNING_IN);
         }
 
-        return dogPos;
+        return m_target;
     }
 
     // Gizmos For Debuging
@@ -59,7 +66,7 @@ public class PlayerDogController : MonoBehaviour
         if (m_girl) {
             Gizmos.color = Color.black;
             Gizmos.DrawWireSphere(m_girlRigidbody.position, m_radius);
-            Gizmos.DrawWireSphere(CalculateRealTarget(), 0.3f);
+            Gizmos.DrawWireSphere(m_target, 0.3f);
         }
     }
 }

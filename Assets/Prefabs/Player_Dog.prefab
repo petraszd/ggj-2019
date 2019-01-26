@@ -132,5 +132,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_girl: {fileID: 0}
-  m_radius: 2
-  m_speed: 7
+  m_radius: 3
+  m_speed: 4
