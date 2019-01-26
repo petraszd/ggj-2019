@@ -1,0 +1,5 @@
+- Suns dvigubas greitis: kad kai mergaitė tempia tai taip lėčiau eitų, nei kai
+  kad nurodžius kur bėgti.
+
+- Mergaitės dvigubas greitis: jeigu šuo yra jos krypties priekyje, tai
+  greičiau eiti.

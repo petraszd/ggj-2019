@@ -17,6 +17,11 @@ public class PlayerDogController : MonoBehaviour
     private Vector2 m_target;
     private Camera m_camera;
 
+    public float Radius
+    {
+        get { return m_radius; }
+    }
+
     void Awake()
     {
         m_rigidbody = GetComponent<Rigidbody2D>();

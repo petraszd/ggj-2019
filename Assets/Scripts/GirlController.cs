@@ -7,21 +7,27 @@ public class GirlController : MonoBehaviour
 {
     private PathManager m_path;
 
+    public PlayerDogController m_dog;
     public float m_speed;
     public int m_currentPoint;
     private int m_previousPoint = -1;
 
     private Rigidbody2D m_rigidbody;
+    private Rigidbody2D m_dogRigidbody;
 
     void Awake()
     {
         m_rigidbody = GetComponent<Rigidbody2D>();
-        Debug.Assert(m_rigidbody != null);
     }
 
     void Start()
     {
         m_path = PathManager.GetInstance();
+        if (m_dog == null) {
+            m_dog = GameObject.Find("Player_Dog").GetComponent<PlayerDogController>();
+        }
+        Debug.Assert(m_dog != null);
+        m_dogRigidbody = m_dog.GetComponent<Rigidbody2D>();
     }
 
     void FixedUpdate()
@@ -41,17 +47,60 @@ public class GirlController : MonoBehaviour
 
     int ChooseNewPoint()
     {
-        List<int> connectedPoints = new List<int>();
+        int[] indexes = GetConnectedPointIndexes();
+        Vector2 dogPos = m_dogRigidbody.position;
+        Vector2 girlPos = m_rigidbody.position;
+        float[] distances = new float[indexes.Length];
+
+        for (int i = 0; i < indexes.Length; ++i) {
+            Vector2 point = m_path.Points[indexes[i]];
+            Vector2 direction = point - girlPos;
+            direction.Normalize();
+            distances[i] = Vector2.Distance(dogPos, girlPos + direction * m_dog.Radius);
+        }
+
+        int dogPrefersIndex = Random.Range(0, indexes.Length);
+        for (int i = 0; i < indexes.Length; ++i) {
+            float distance = distances[i];
+            if (distance < distances[dogPrefersIndex]) {
+                dogPrefersIndex = i;
+            }
+        }
+
+        return indexes[dogPrefersIndex];
+    }
+
+    int[] GetConnectedPointIndexes()
+    {
+        List<int> result = new List<int>();
         for (int i = 0; i < m_path.Connections.Length; ++i) {
             PointConnection conn = m_path.Connections[i];
 
             if (conn.index0 == m_currentPoint && conn.index1 != m_previousPoint) {
-                connectedPoints.Add(m_path.Connections[i].index1);
+                result.Add(m_path.Connections[i].index1);
             } else if (conn.index1 == m_currentPoint && conn.index0 != m_previousPoint) {
-                connectedPoints.Add(m_path.Connections[i].index0);
+                result.Add(m_path.Connections[i].index0);
             }
         }
+        return result.ToArray();
+    }
 
-        return connectedPoints[Random.Range(0, connectedPoints.Count)];
+    // Gizmos For Debuging
+    // -------------------
+    void OnDrawGizmos()
+    {
+        if (!m_path || !m_dog) {
+            return;
+        }
+        Gizmos.color = Color.green;
+
+        Vector2 girlPos = m_rigidbody.position;
+        int[] indexes = GetConnectedPointIndexes();
+        for (int i = 0; i < indexes.Length; ++i) {
+            Vector2 point = m_path.Points[indexes[i]];
+            Vector2 direction = point - girlPos;
+            direction.Normalize();
+            Gizmos.DrawWireSphere(girlPos + direction * m_dog.Radius, 0.2f);
+        }
     }
 }
