@@ -18,11 +18,11 @@ public class TreeController : MonoBehaviour
         switch (Tag)
         {
             case "Enemy":
-                gameObject.GetComponent<SpriteRenderer>().color = EnemyControlledColor;
+                //gameObject.GetComponent<SpriteRenderer>().color = EnemyControlledColor;
                 Owner = -1;
                 break;
             case "Player":
-                gameObject.GetComponent<SpriteRenderer>().color = PlayerControlledColor;
+                //gameObject.GetComponent<SpriteRenderer>().color = PlayerControlledColor;
                 Owner = 1;
                 break;
         }
