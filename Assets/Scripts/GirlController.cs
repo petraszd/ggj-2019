@@ -5,12 +5,16 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class GirlController : MonoBehaviour
 {
+    private static float MIN_DISTANCE_BEFORE_CHOOSING_NEW_DIRECTION = 0.2f;
     private PathManager m_path;
 
     public PlayerDogController m_dog;
     public float m_speed;
     public int m_currentPoint;
     private int m_previousPoint = -1;
+
+    [HeaderAttribute("Hierarchy")]
+    public Transform m_spritesTransform;
 
     private Rigidbody2D m_rigidbody;
     private Rigidbody2D m_dogRigidbody;
@@ -35,9 +39,10 @@ public class GirlController : MonoBehaviour
         Vector2 target = m_path.Points[m_currentPoint];
         Vector2 direction = target - m_rigidbody.position;
         float distance = direction.magnitude;
-        if (distance < 0.2f) {
+        if (distance < MIN_DISTANCE_BEFORE_CHOOSING_NEW_DIRECTION) {
             int temp = m_currentPoint;
             m_currentPoint = ChooseNewPoint();
+            UpdateSpritesScaleX(temp, m_currentPoint);
             m_previousPoint = temp;
         }
         direction.Normalize();
@@ -68,6 +73,22 @@ public class GirlController : MonoBehaviour
         }
 
         return indexes[dogPrefersIndex];
+    }
+
+    void UpdateSpritesScaleX(int currentIndex, int nextIndex)
+    {
+        Vector2 current = m_path.Points[currentIndex];
+        Vector2 next = m_path.Points[nextIndex];
+
+        if (current.x > next.x) {
+            Vector3 scale = m_spritesTransform.localScale;
+            scale.x = Mathf.Abs(scale.x);
+            m_spritesTransform.localScale = scale;
+        } else {
+            Vector3 scale = m_spritesTransform.localScale;
+            scale.x = -Mathf.Abs(scale.x);
+            m_spritesTransform.localScale = scale;
+        }
     }
 
     int[] GetConnectedPointIndexes()

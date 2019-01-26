@@ -403,6 +403,7 @@ MonoBehaviour:
   m_dog: {fileID: 0}
   m_speed: 1
   m_currentPoint: 0
+  m_spritesTransform: {fileID: 2545160396661185088}
 --- !u!95 &1743304731453605785
 Animator:
   serializedVersion: 3
