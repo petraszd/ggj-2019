@@ -95,7 +95,7 @@ public class PlayerDogController : MonoBehaviour
 
     // Gizmos For Debuging
     // -------------------
-    void OnDrawGizmosSelected()
+    void OnDrawGizmos()
     {
         if (m_girl) {
             Gizmos.color = Color.black;
