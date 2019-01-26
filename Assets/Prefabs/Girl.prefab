@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3952734632073699418}
   - component: {fileID: 1553957835504721691}
+  - component: {fileID: 5024139599835824966}
   m_Layer: 0
   m_Name: Girl_Arm_Front
   m_TagString: Untagged
@@ -79,6 +80,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5024139599835824966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 815517059490836514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11a5fc23f43554f3baf8a0dcee921a05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1254160169200113344
 GameObject:
   m_ObjectHideFlags: 0
