@@ -10,6 +10,7 @@ public class GirlController : MonoBehaviour
 
     public PlayerDogController m_dog;
     public float m_speed;
+    public bool m_isWaiting;
     public int m_currentPoint;
     private int m_previousPoint = -1;
 
@@ -19,8 +20,15 @@ public class GirlController : MonoBehaviour
     private Rigidbody2D m_rigidbody;
     private Rigidbody2D m_dogRigidbody;
 
+    public bool IsWaiting
+    {
+        get { return m_isWaiting; }
+        set { m_isWaiting = value; }
+    }
+
     void Awake()
     {
+        m_isWaiting = false;
         m_rigidbody = GetComponent<Rigidbody2D>();
     }
 
@@ -36,6 +44,10 @@ public class GirlController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (m_isWaiting) {
+            return;
+        }
+
         Vector2 target = m_path.Points[m_currentPoint];
         Vector2 direction = target - m_rigidbody.position;
         float distance = direction.magnitude;
@@ -59,9 +71,7 @@ public class GirlController : MonoBehaviour
 
         for (int i = 0; i < indexes.Length; ++i) {
             Vector2 point = m_path.Points[indexes[i]];
-            Vector2 direction = point - girlPos;
-            direction.Normalize();
-            distances[i] = Vector2.Distance(dogPos, girlPos + direction * m_dog.Radius);
+            distances[i] = Vector2.Distance(dogPos, point);
         }
 
         int dogPrefersIndex = Random.Range(0, indexes.Length);

@@ -4,26 +4,39 @@ using UnityEngine;
 
 public class TreeController : MonoBehaviour
 {
-    public int Owner = 0;
+    public TreeOwnerType Owner = TreeOwnerType.Neutral;
+    public int Index;
+    public bool IsLocked;
 
     public Color EnemyControlledColor;
     public Color NeutralColor;
     public Color PlayerControlledColor;
 
+    private TreeManager m_treeManager;
+
+    void Start()
+    {
+        m_treeManager = TreeManager.GetInstance();
+    }
+
     void OnTriggerEnter2D (Collider2D col)
     {
+        if (IsLocked) {
+            return;
+        }
+
         string Tag = col.tag;
 
         /// Change sprites?
         switch (Tag)
         {
             case "Enemy":
-                //gameObject.GetComponent<SpriteRenderer>().color = EnemyControlledColor;
-                Owner = -1;
+                m_treeManager.MarkTreeByEnemy(Index);
+                Owner = TreeOwnerType.Enemy;
                 break;
             case "Player":
-                //gameObject.GetComponent<SpriteRenderer>().color = PlayerControlledColor;
-                Owner = 1;
+                m_treeManager.MarkByPlayer(Index);
+                Owner = TreeOwnerType.Player;
                 break;
         }
     }
