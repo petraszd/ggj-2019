@@ -117,10 +117,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
   AdditionalTarget: {fileID: 0}
-  MoveSpeed: 1
+  MoveSpeed: 3
   StoppingDistance: 0.5
-  TreeSenseRadius: 2
-  TreeReached: 0
+  TreeSenseRadius: 1.5
+  RestartMenu: {fileID: 5926434509401676450, guid: 77c631ec47724cb4dbc4420f877d060c,
+    type: 3}
 --- !u!60 &2586379632619949301
 PolygonCollider2D:
   m_ObjectHideFlags: 0

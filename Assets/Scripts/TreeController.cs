@@ -13,7 +13,6 @@ public class TreeController : MonoBehaviour
     void OnTriggerEnter2D (Collider2D col)
     {
         string Tag = col.tag;
-        Debug.Log (Tag);
 
         /// Change sprites?
         switch (Tag)

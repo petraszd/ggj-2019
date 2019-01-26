@@ -10,26 +10,24 @@ public class EnemyController : MonoBehaviour
     public int MoveSpeed;
     public float StoppingDistance;
     public float TreeSenseRadius;
-
-    public bool TreeReached = false;
+    
     float DistanceToOtherTrees;
 
     TreeManager TreeManagerCode;
     GameObject TreeManagerGO;
 
     Vector2 MoveDir;
+    public GameObject RestartMenu;
 
     void Start()
     {
         TreeManagerGO = GameObject.FindGameObjectWithTag("Tree Manager");
         TreeManagerCode = TreeManagerGO.GetComponent<TreeManager>();
-        //do
-        //{
-            Target = TreeManagerCode.Trees[Random.Range(0, TreeManagerCode.Trees.Length)];
-            //Debug.Log("a");
-        //}
-        //while (Target.GetComponent<TreeController>().Owner != -1);
-        MoveDir = (transform.position - Target.position).normalized;
+        if (TreeManagerCode.TreesForEnemies.Count != 0)
+        {
+            Target = TreeManagerCode.TreesForEnemies[Random.Range(0, TreeManagerCode.TreesForEnemies.Count)];
+            MoveDir = (transform.position - Target.position).normalized;
+        }
     }
     
     void Update()
@@ -61,12 +59,11 @@ public class EnemyController : MonoBehaviour
                 }
                 else
                 {
+                    /// Tree reached
                     AdditionalTarget = null;
-                    transform.position = Vector2.MoveTowards(transform.position, Target.position, Time.deltaTime * MoveSpeed);
-                    MoveDir = (transform.position - Target.position).normalized;
                 }
             }
-            else if (TreeReached)
+            else if (Target.GetComponent<TreeController>().Owner == -1)
             {
                 /// Go away
                 transform.Translate(-MoveDir * MoveSpeed * Time.deltaTime);
@@ -77,10 +74,6 @@ public class EnemyController : MonoBehaviour
                 transform.position = Vector2.MoveTowards(transform.position, Target.position, Time.deltaTime * MoveSpeed);
                 MoveDir = (transform.position - Target.position).normalized;
                 //transform.LookAt(Target);
-            }
-            else 
-            {
-                TreeReached = true;
             }
         }
     }

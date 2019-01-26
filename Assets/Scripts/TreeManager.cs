@@ -6,6 +6,7 @@ public class TreeManager : MonoBehaviour
 {
     public GameObject[] TreesGO;
     public Transform[] Trees;
+    public List<Transform> TreesForEnemies;
 
     void Start()
     {
@@ -14,6 +15,25 @@ public class TreeManager : MonoBehaviour
         for (int i = 0; i < TreesGO.Length; i++)
         {
             Trees[i] = TreesGO[i].GetComponent<Transform>();
+        }
+
+        TreesForEnemies = new List<Transform>();
+    }
+
+    void Update()
+    {
+        TreesForEnemies.Clear();
+        foreach (Transform t in Trees)
+        {
+            if (t.GetComponent<TreeController>().Owner != -1)
+            {
+                TreesForEnemies.Add(t);
+            }
+        }
+
+        if (TreesForEnemies.Count == 0)
+        {
+            Debug.Log("ALL TREES ARE CONTROLLED BY ENEMIES - GAME OVER!");
         }
     }
 }
