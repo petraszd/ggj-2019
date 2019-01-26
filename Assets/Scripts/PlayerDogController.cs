@@ -2,31 +2,64 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerDogController : MonoBehaviour
 {
+    private static float EPSILON = 0.3f;
+
     public GirlController m_girl = null;
+    public float m_radius = 2.0f;
+    public float m_speed = 1.0f;
 
-    void OnEnable()
-    {
-        GirlController.OnGirlInstance += OnGirlInstance;
-    }
+    private Rigidbody2D m_girlRigidbody;
+    private Rigidbody2D m_rigidbody;
 
-    void OnDisable()
+    void Awake()
     {
-        GirlController.OnGirlInstance -= OnGirlInstance;
+        m_rigidbody = GetComponent<Rigidbody2D>();
     }
 
     void Start()
     {
+        if (m_girl == null) {
+            m_girl = GameObject.Find("Girl").GetComponent<GirlController>();
+        }
+
         Debug.Assert(m_girl != null);
+        m_girlRigidbody = m_girl.GetComponent<Rigidbody2D>();
     }
 
     void FixedUpdate()
     {
+        Vector2 target = CalculateRealTarget();
+        Vector2 direction = target - m_rigidbody.position;
+        Vector2 delta = direction * m_speed * Time.fixedDeltaTime;
+        m_rigidbody.MovePosition(m_rigidbody.position + delta);
     }
 
-    void OnGirlInstance(GirlController girl)
+    Vector2 CalculateRealTarget()
     {
-        m_girl = girl;
+        Vector2 girlPos = m_girlRigidbody.position;
+        Vector2 dogPos = m_rigidbody.position;
+
+        if (Vector2.Distance(girlPos, dogPos) > m_radius) {
+            Vector2 direction = girlPos - dogPos;
+            direction.Normalize();
+
+            return girlPos - direction * (m_radius - EPSILON);
+        }
+
+        return dogPos;
+    }
+
+    // Gizmos For Debuging
+    // -------------------
+    void OnDrawGizmosSelected()
+    {
+        if (m_girl) {
+            Gizmos.color = Color.black;
+            Gizmos.DrawWireSphere(m_girlRigidbody.position, m_radius);
+            Gizmos.DrawWireSphere(CalculateRealTarget(), 0.3f);
+        }
     }
 }

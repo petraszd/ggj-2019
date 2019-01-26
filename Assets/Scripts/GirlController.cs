@@ -5,9 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class GirlController : MonoBehaviour
 {
-    public delegate void EventGirlInstance(GirlController girl);
-    public static event EventGirlInstance OnGirlInstance;
-
     private PathManager m_path;
 
     public float m_speed;
