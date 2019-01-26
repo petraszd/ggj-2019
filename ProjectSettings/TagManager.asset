@@ -50,3 +50,6 @@ TagManager:
   - name: Dog
     uniqueID: 2682747941
     locked: 0
+  - name: Objects
+    uniqueID: 460873763
+    locked: 0

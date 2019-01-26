@@ -249,6 +249,7 @@ GameObject:
   - component: {fileID: 1755690869191686054}
   - component: {fileID: 1755690869191685721}
   - component: {fileID: 6099369322760470539}
+  - component: {fileID: 220990139352858412}
   - component: {fileID: 1755690869191686053}
   m_Layer: 0
   m_Name: Player_Dog
@@ -328,6 +329,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!210 &220990139352858412
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755690869191685720}
+  m_Enabled: 1
+  m_SortingLayerID: 460873763
+  m_SortingLayer: 3
+  m_SortingOrder: 0
 --- !u!114 &1755690869191686053
 MonoBehaviour:
   m_ObjectHideFlags: 0
