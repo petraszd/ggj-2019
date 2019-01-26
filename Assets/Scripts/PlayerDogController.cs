@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Animator))]
 public class PlayerDogController : MonoBehaviour
 {
+    private static string ANIM_STATE_IS_RUNNING = "Is_Running";
+    private static string ANIM_STATE_IS_PISSING = "Is_Pissing";
     private static float RATIO_WHEN_RUNNING_IN = 0.3f;
     private static float STAND_STILL_EPSILON = 0.2f;
 
@@ -14,6 +17,7 @@ public class PlayerDogController : MonoBehaviour
 
     private Rigidbody2D m_girlRigidbody;
     private Rigidbody2D m_rigidbody;
+    private Animator m_animator;
     private Vector2 m_target;
     private Camera m_camera;
 
@@ -25,6 +29,7 @@ public class PlayerDogController : MonoBehaviour
     void Awake()
     {
         m_rigidbody = GetComponent<Rigidbody2D>();
+        m_animator = GetComponent<Animator>();
     }
 
     void Start()
@@ -56,6 +61,9 @@ public class PlayerDogController : MonoBehaviour
 
         if (distance > STAND_STILL_EPSILON) {
             m_rigidbody.MovePosition(m_rigidbody.position + delta);
+            m_animator.SetBool(ANIM_STATE_IS_RUNNING, true);
+        } else {
+            m_animator.SetBool(ANIM_STATE_IS_RUNNING, false);
         }
     }
 
