@@ -12,16 +12,18 @@ public class LeashController : MonoBehaviour
     public Rigidbody2D m_end;
 
     [HeaderAttribute("Rendering")]
+    public LineRenderer m_line;
     public Transform[] m_items;
 
-    private LineRenderer m_line;
     private Vector3[] m_positions;
+    private Transform m_lineTransform;
 
     void Awake()
     {
-        m_line = GetComponent<LineRenderer>();
         m_positions = new Vector3[m_items.Length];
-        UpdateLinePosition();
+        UpdateLinePositions();
+
+        m_lineTransform = m_line.GetComponent<Transform>();
     }
 
     void Start()
@@ -39,7 +41,9 @@ public class LeashController : MonoBehaviour
 
     void Update()
     {
-        UpdateLinePosition();
+        // For sorting layers
+        m_lineTransform.position = m_handTransform.position;
+        UpdateLinePositions();
     }
 
     void FixedUpdate()
@@ -48,7 +52,7 @@ public class LeashController : MonoBehaviour
         m_end.MovePosition(m_dogTransform.position);
     }
 
-    void UpdateLinePosition()
+    void UpdateLinePositions()
     {
         for (int i = 0; i < m_items.Length; ++i) {
             Vector3 pos = m_items[i].position;
