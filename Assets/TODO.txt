@@ -7,3 +7,5 @@
 - Geresnė mergaitės animacija
 
 - Mergaitė truktelna šunuką, kai tas už ribų
+
+- 2D Layer fighting
