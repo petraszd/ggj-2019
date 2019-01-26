@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Tree
   - Enemy
+  - Tree Manager
   layers:
   - Default
   - TransparentFX
@@ -45,4 +46,7 @@ TagManager:
     locked: 0
   - name: Girl
     uniqueID: 957262917
+    locked: 0
+  - name: Dog
+    uniqueID: 2682747941
     locked: 0

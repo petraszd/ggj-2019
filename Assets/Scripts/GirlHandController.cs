@@ -10,6 +10,7 @@ public class GirlHandController : MonoBehaviour
     void Start()
     {
         if (m_dog == null) {
+            Debug.Log(GameObject.Find("Player_Dog"));
             m_dog = GameObject.Find("Player_Dog").GetComponent<PlayerDogController>();
         }
         Debug.Assert(m_dog != null);
