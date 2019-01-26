@@ -9,7 +9,7 @@ public class GirlController : MonoBehaviour
   static Color COLOR_CONNECTION = Color.cyan;
   static Color COLOR_CURRENT_POINT = Color.red;
 
-  [Header("Tracel Path")]
+  [Header("Trace Path")]
   public int m_currentPoint;
   private int m_previousPoint = -1;
 
