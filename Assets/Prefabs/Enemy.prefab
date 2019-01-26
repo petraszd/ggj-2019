@@ -120,8 +120,8 @@ MonoBehaviour:
   MoveSpeed: 3
   StoppingDistance: 0.5
   TreeSenseRadius: 1.5
-  RestartMenu: {fileID: 5926434509401676450, guid: 77c631ec47724cb4dbc4420f877d060c,
-    type: 3}
+  MinDistToTree: 0.4
+  MaxDistToTree: 0.6
 --- !u!60 &2586379632619949301
 PolygonCollider2D:
   m_ObjectHideFlags: 0
