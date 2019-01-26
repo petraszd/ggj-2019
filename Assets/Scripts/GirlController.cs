@@ -30,6 +30,8 @@ public class GirlController : MonoBehaviour
 
   void FixedUpdate()
   {
+        Debug.Log("Kazkas");
+
     Vector2 target = m_points[m_currentPoint];
     Vector2 direction = target - m_rigidbody.position;
     float distance = direction.magnitude;
