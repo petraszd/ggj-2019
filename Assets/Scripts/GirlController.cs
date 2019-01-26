@@ -84,23 +84,4 @@ public class GirlController : MonoBehaviour
         }
         return result.ToArray();
     }
-
-    // Gizmos For Debuging
-    // -------------------
-    void OnDrawGizmos()
-    {
-        if (!m_path || !m_dog) {
-            return;
-        }
-        Gizmos.color = Color.green;
-
-        Vector2 girlPos = m_rigidbody.position;
-        int[] indexes = GetConnectedPointIndexes();
-        for (int i = 0; i < indexes.Length; ++i) {
-            Vector2 point = m_path.Points[indexes[i]];
-            Vector2 direction = point - girlPos;
-            direction.Normalize();
-            Gizmos.DrawWireSphere(girlPos + direction * m_dog.Radius, 0.2f);
-        }
-    }
 }
