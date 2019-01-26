@@ -395,9 +395,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_handTransform: {fileID: 0}
   m_dogTransform: {fileID: 0}
-  m_line: {fileID: 9085466605907384515}
   m_start: {fileID: 6925037997078213263}
   m_end: {fileID: 6925037997845005163}
+  m_line: {fileID: 9085466605907384515}
   m_items:
   - {fileID: 6925037997078213249}
   - {fileID: 6925037996970654049}
@@ -414,6 +414,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7884355353310674734}
   - component: {fileID: 9085466605907384515}
+  - component: {fileID: 566195541}
   m_Layer: 0
   m_Name: Leash_Renderer
   m_TagString: Untagged
@@ -469,9 +470,9 @@ LineRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 957262917
-  m_SortingLayer: 1
-  m_SortingOrder: 5
+  m_SortingLayerID: 460873763
+  m_SortingLayer: 3
+  m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
@@ -533,3 +534,14 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!210 &566195541
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7316966091801686106}
+  m_Enabled: 1
+  m_SortingLayerID: 460873763
+  m_SortingLayer: 3
+  m_SortingOrder: 0
