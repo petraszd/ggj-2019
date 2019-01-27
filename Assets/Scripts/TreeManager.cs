@@ -57,7 +57,7 @@ public class TreeManager : MonoBehaviour
         if (!IsTreeUncotrolledByEnemy())
         {
             Debug.Log("ALL TREES ARE CONTROLLED BY ENEMIES - GAME OVER!");
-            AudioManager.PlayGameOver();
+            AudioManager.PlayLose();
         }
     }
 

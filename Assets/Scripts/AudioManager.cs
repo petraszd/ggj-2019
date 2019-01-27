@@ -9,7 +9,8 @@ public class AudioManager : MonoBehaviour
 
     public AudioClip PissClip;
     public AudioClip BarkClip;
-    public AudioClip GameOverClip;
+    public AudioClip LoseClip;
+    public AudioClip WinClip;
 
     public float pitchRandomness = 0.2f;
     private float originalFXPitch;
@@ -62,19 +63,34 @@ public class AudioManager : MonoBehaviour
         PlayFxClip(BarkClip);
     }
 
-    // Game Over
-    public static void PlayGameOver()
+    // Lose
+    public static void PlayLose()
     {
         if (instance == null)
         {
             return;
         }
-        instance.InstancePlayGameOver();
+        instance.InstancePlayLose();
     }
 
-    private void InstancePlayGameOver()
+    private void InstancePlayLose()
     {
-        PlayFxClip(GameOverClip);
+        PlayFxClip(LoseClip);
+    }
+
+    // Win
+    public static void PlayWin()
+    {
+        if (instance == null)
+        {
+            return;
+        }
+        instance.InstancePlayWin();
+    }
+
+    private void InstancePlayWin()
+    {
+        PlayFxClip(WinClip);
     }
 
     private void PlayFxClip(AudioClip clip)

@@ -49,7 +49,8 @@ MonoBehaviour:
   fxSource: {fileID: 7264598849423930670}
   PissClip: {fileID: 8300000, guid: b41177c82d3a1d646ad79dcaca5af49b, type: 3}
   BarkClip: {fileID: 8300000, guid: 6d34c6b8f9cf1a04cba9118ea4a832ea, type: 3}
-  GameOverClip: {fileID: 0}
+  LoseClip: {fileID: 8300000, guid: 8c3ef03040b18d6449c66f68403a3741, type: 3}
+  WinClip: {fileID: 8300000, guid: 77833a391d7ffc146bba8af5561773a1, type: 3}
   pitchRandomness: 0.2
 --- !u!82 &7264598849423930671
 AudioSource:
