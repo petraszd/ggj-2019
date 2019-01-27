@@ -47,8 +47,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicSource: {fileID: 7264598849423930671}
   fxSource: {fileID: 7264598849423930670}
-  PissClip: {fileID: 8300000, guid: 36b4ef64809e6184a970da1a2bceb48b, type: 3}
+  PissClip: {fileID: 8300000, guid: b41177c82d3a1d646ad79dcaca5af49b, type: 3}
   BarkClip: {fileID: 8300000, guid: 6d34c6b8f9cf1a04cba9118ea4a832ea, type: 3}
+  GameOverClip: {fileID: 0}
   pitchRandomness: 0.2
 --- !u!82 &7264598849423930671
 AudioSource:
@@ -158,7 +159,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.27
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 0
   Mute: 0
