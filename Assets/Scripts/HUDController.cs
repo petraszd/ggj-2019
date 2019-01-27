@@ -8,6 +8,7 @@ public class HUDController : MonoBehaviour
 {
     public Image m_percentBackground;
     public TextMeshProUGUI m_percentText;
+    public TextMeshProUGUI m_numberOfDogsText;
 
     [HeaderAttribute("Colors")]
     public Color m_percentBackGoodColor;
@@ -23,11 +24,13 @@ public class HUDController : MonoBehaviour
     void OnEnable()
     {
         TreeManager.OnTreeNumbersChanged += OnTreeNumbersChanged;
+        EnemiesSpawner.OnTimeRemaining += OnTimeRemaining;
     }
 
     void OnDisable()
     {
         TreeManager.OnTreeNumbersChanged -= OnTreeNumbersChanged;
+        EnemiesSpawner.OnTimeRemaining -= OnTimeRemaining;
     }
 
     void Start()
@@ -72,5 +75,10 @@ public class HUDController : MonoBehaviour
         }
 
         m_percentText.text = string.Format("{0:F1}%", playerPercent);
+    }
+
+    void OnTimeRemaining(float timeRemaining)
+    {
+        m_numberOfDogsText.text = string.Format("Time {0:F1} s.", timeRemaining);
     }
 }
