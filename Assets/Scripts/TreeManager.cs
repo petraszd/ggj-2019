@@ -52,15 +52,6 @@ public class TreeManager : MonoBehaviour
         EmitTreeNumbersChanged();
     }
 
-    void Update()
-    {
-        if (!IsTreeUncotrolledByEnemy())
-        {
-            Debug.Log("ALL TREES ARE CONTROLLED BY ENEMIES - GAME OVER!");
-            AudioManager.PlayLose();
-        }
-    }
-
     void EmitTreeMarkedByPlayer(Vector2 treePos, int treeIndex)
     {
         if (OnTreeMarkedByPlayer != null) {
