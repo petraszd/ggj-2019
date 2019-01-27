@@ -88,8 +88,12 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
+        if (RB == null) {
+            return;
+        }
+
         /// Tree sense circle
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(RB.position, TreeSenseRadius);

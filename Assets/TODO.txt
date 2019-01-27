@@ -1,8 +1,8 @@
 - Win Scene
 - Lose Scene
 - HUD
-- Mergaitė truktelna šunuką, kai tas už ribų
 - Music
 - Audio
 - Enemy riging
 - Kur suo gali eiti.
+- Do not piss on owned tree

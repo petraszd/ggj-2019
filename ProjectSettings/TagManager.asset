@@ -47,6 +47,9 @@ TagManager:
   - name: Girl
     uniqueID: 957262917
     locked: 0
+  - name: Enemy
+    uniqueID: 3944582209
+    locked: 0
   - name: Dog
     uniqueID: 2682747941
     locked: 0
