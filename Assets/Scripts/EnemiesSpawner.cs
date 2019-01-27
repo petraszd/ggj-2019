@@ -4,41 +4,45 @@ using UnityEngine;
 
 public class EnemiesSpawner : MonoBehaviour
 {
-    public GameObject[] Enemies;
     public float Cooldown;
     private float CurrentCooldown;
-    public int SpawnMinX_Positive;
-    public int SpawnMaxX_Positive;
-    public int SpawnMinY_Negative;
-    public int SpawnMaxY_Positive;
+
+    public Transform m_enemyDogsHolder;
+
+    private EnemyController[] m_enemyDogs;
+    private int m_currentIndex;
 
     void Start()
     {
+        if (m_enemyDogsHolder == null) {
+            m_enemyDogsHolder = GameObject.Find("Enemy_Dogs").GetComponent<Transform>();
+        }
+        Debug.Assert(m_enemyDogsHolder != null);
+
         CurrentCooldown = Cooldown;
+
+        m_enemyDogs = new EnemyController[m_enemyDogsHolder.childCount];
+        int index = 0;
+        foreach(Transform child in m_enemyDogsHolder) {
+            m_enemyDogs[index] = child.GetComponent<EnemyController>();
+            index++;
+        }
+        m_currentIndex = 0;
     }
-    
+
     void Update()
     {
         if (CurrentCooldown >= 0)
         {
             CurrentCooldown -= Time.deltaTime;
         }
-        else
+        else if (m_currentIndex < m_enemyDogs.Length)
         {
             CurrentCooldown = Cooldown;
-            int Nr = Random.Range(0, Enemies.Length);
-
-            float X = Random.Range(SpawnMinX_Positive, SpawnMaxX_Positive);
-            float Y = Random.Range(SpawnMinY_Negative, SpawnMaxY_Positive);
-
-            bool TrueOrFalse = (Random.value > 0.5f);
-            if (TrueOrFalse)
-            {
-                X = -X;
-            }
-
-            Vector3 SpawnLocation = new Vector3(X, Y, 0);
-            Instantiate(Enemies[Nr], SpawnLocation, Quaternion.identity);
+            m_enemyDogs[m_currentIndex].BeginRunning();
+            m_currentIndex++;
         }
+
+        // TODO: delay and annouce that enemies are over
     }
 }

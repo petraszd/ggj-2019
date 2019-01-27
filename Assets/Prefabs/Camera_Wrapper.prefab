@@ -46,11 +46,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CameraLimits:
     serializedVersion: 2
-    x: -8.2
-    y: -4.9
-    width: 16.5
-    height: 9.5
-  _Texture: {fileID: 0}
+    x: -6.5
+    y: -2.7
+    width: 13
+    height: 5.4
 --- !u!1 &3816119505407685737
 GameObject:
   m_ObjectHideFlags: 0

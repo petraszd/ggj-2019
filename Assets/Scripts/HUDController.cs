@@ -59,6 +59,9 @@ public class HUDController : MonoBehaviour
 
     void OnTreeNumbersChanged(int nTotal, int nEnemies, int nPlayer)
     {
+        if (m_treeManager == null) {
+            m_treeManager = TreeManager.GetInstance();
+        }
         float playerPercent = nPlayer / (float)(nTotal) * 100.0f;
         float enemyPercent = nEnemies / (float)(nTotal) * 100.0f;
 
