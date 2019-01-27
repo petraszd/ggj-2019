@@ -1,6 +1,5 @@
 - Music
 - Audio
-- Enemy Swanner
+
 - Win Scene
 - Lose Scene
-- Kur suo gali eiti.

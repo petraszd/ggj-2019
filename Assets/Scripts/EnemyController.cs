@@ -97,6 +97,8 @@ public class EnemyController : MonoBehaviour
             m_target += new Vector2(-direction.y, direction.x) * Random.Range(MinDistToTree, MaxDistToTree);
             m_direction = m_target - RB.position;
             m_isRunning = true;
+
+            AudioManager.PlayBark();
         }
     }
 
