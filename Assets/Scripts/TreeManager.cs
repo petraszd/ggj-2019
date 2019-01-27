@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class TreeManager : MonoBehaviour
 {
-    public delegate void EventTreeMarkedByPlayer(Vector2 treePos, int index);
+    public delegate void EventTreeMarkedByDog(Vector2 treePos, int index);
 
-    public static event EventTreeMarkedByPlayer OnTreeMarkedByPlayer;
+    public static event EventTreeMarkedByDog OnTreeMarkedByPlayer;
+    public static event EventTreeMarkedByDog OnTreeMarkedByEnemy;
 
     private static TreeManager m_instance;
 
@@ -53,9 +54,19 @@ public class TreeManager : MonoBehaviour
         }
     }
 
+    void EmitTreeMarkedByEnemy(Vector2 treePos, int treeIndex)
+    {
+        if (OnTreeMarkedByEnemy != null) {
+            OnTreeMarkedByEnemy(treePos, treeIndex);
+        }
+    }
+
+
     public void MarkTreeByEnemy(int index)
     {
         TreeControllers[index].Owner = TreeOwnerType.Enemy;
+        Vector2 treePos = Trees[index].position;
+        EmitTreeMarkedByEnemy(treePos, index);
     }
 
     public void MarkByPlayer(int index)
