@@ -12,6 +12,7 @@ public class EnemyController : MonoBehaviour
     public float MinDistToTree;
     public float MaxDistToTree;
     public ParticleSystem m_particles;
+    public Transform m_spritesTransform;
 
     bool m_isRunning = false;
     bool m_isPissing = false;
@@ -52,16 +53,36 @@ public class EnemyController : MonoBehaviour
             return;
         }
 
+        Vector2 direction;
         if (m_isPissing) {
-            Vector2 direction = m_target - RB.position;
+            direction = m_target - RB.position;
+            direction.Normalize();
             float distance = Vector2.Distance(m_target, RB.position);
-            RB.MovePosition(RB.position + direction * Time.fixedDeltaTime * MoveSpeed);
             if (distance < EPSILON_NEAR_TREE_PISSING) {
                 m_isRunning = false;
             }
         } else {
-            Vector2 direction = m_direction;
+            direction = m_direction;
             direction.Normalize();
+        }
+
+        if (m_isRunning) {
+            Vector3 scale = m_spritesTransform.localScale;
+            var shape = m_particles.shape;
+            Vector3 particlesPosition = shape.position;
+            if (direction.x > 0.0f) {
+                particlesPosition.z = -0.1f;
+                shape.position = particlesPosition;
+
+                scale.x = Mathf.Abs(scale.x);
+            } else if (direction.x < 0.0f) {
+                // Somehow it works with both -0.1f. No time to find out why
+                particlesPosition.z = -0.1f;
+                shape.position = particlesPosition;
+
+                scale.x = -Mathf.Abs(scale.x);
+            }
+            m_spritesTransform.localScale = scale;
             RB.MovePosition(RB.position + direction * Time.fixedDeltaTime * MoveSpeed);
         }
     }
