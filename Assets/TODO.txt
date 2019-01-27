@@ -1,9 +1,7 @@
-- Win Scene
-- Lose Scene
 - HUD
-- Camera, kad neužeitų
 - Music
 - Audio
-- Enemy riging
+- Enemy Swanner
+- Win Scene
+- Lose Scene
 - Kur suo gali eiti.
-- Do not piss on owned tree
