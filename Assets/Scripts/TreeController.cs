@@ -8,15 +8,17 @@ public class TreeController : MonoBehaviour
     public int Index;
     public bool IsLocked;
 
-    public Color EnemyControlledColor;
-    public Color NeutralColor;
-    public Color PlayerControlledColor;
+    public Sprite PlayerControlledSprite;
+    public Sprite EnemyControlledSprite;
+    private SpriteRenderer GlowSpriteRenderer;
 
     private TreeManager m_treeManager;
+    public float PissAnimationTime;
 
     void Start()
     {
         m_treeManager = TreeManager.GetInstance();
+        GlowSpriteRenderer = transform.GetChild(1).GetComponent<SpriteRenderer>();
     }
 
     void OnTriggerEnter2D (Collider2D col)
@@ -34,14 +36,22 @@ public class TreeController : MonoBehaviour
                 if (Owner != TreeOwnerType.Enemy) {
                     Owner = TreeOwnerType.Enemy;
                     m_treeManager.MarkTreeByEnemy(Index);
+                    StartCoroutine(ChangeSprite(EnemyControlledSprite));
                 }
                 break;
             case "Player":
                 if (Owner != TreeOwnerType.Player) {
                     Owner = TreeOwnerType.Player;
                     m_treeManager.MarkByPlayer(Index);
+                    StartCoroutine(ChangeSprite(PlayerControlledSprite));
                 }
                 break;
         }
+    }
+
+    IEnumerator ChangeSprite (Sprite _Sprite)
+    {
+        yield return new WaitForSeconds(PissAnimationTime);
+        GlowSpriteRenderer.sprite = _Sprite;
     }
 }
