@@ -290,7 +290,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.5
+      scalar: 1.2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -671,7 +671,7 @@ ParticleSystem:
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 0
     donutRadius: 0.2
-    m_Position: {x: -2.94, y: -1.56, z: 1}
+    m_Position: {x: -5.2, y: 0.4, z: -0.1}
     m_Rotation: {x: 0, y: 0, z: 132}
     m_Scale: {x: 1, y: 1, z: 1}
     placementMode: 0
@@ -752,7 +752,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 1.7
+      value: 0.33
       mode: 0
       spread: 0
       speed:
@@ -5416,9 +5416,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adb7184909e4f8249aca102d56b67b1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AdditionalTarget: {fileID: 0}
   MoveSpeed: 3
   StoppingDistance: 0.5
   MinDistToTree: 0.05
   MaxDistToTree: 0.1
   m_particles: {fileID: 395784330151283631}
+  m_spritesTransform: {fileID: 4953625026857998130}

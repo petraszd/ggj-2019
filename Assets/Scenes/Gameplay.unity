@@ -857,6 +857,26 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2015691114593185193, guid: e21780588021b4d78b0105c32479b651,
+        type: 3}
+      propertyPath: m_rect.x
+      value: 17.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 2015691114593185193, guid: e21780588021b4d78b0105c32479b651,
+        type: 3}
+      propertyPath: m_rect.y
+      value: 5.91
+      objectReference: {fileID: 0}
+    - target: {fileID: 2015691114593185193, guid: e21780588021b4d78b0105c32479b651,
+        type: 3}
+      propertyPath: m_rect.width
+      value: 6.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 2015691114593185193, guid: e21780588021b4d78b0105c32479b651,
+        type: 3}
+      propertyPath: m_rect.height
+      value: 7.3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e21780588021b4d78b0105c32479b651, type: 3}
 --- !u!1001 &1419740333
@@ -1100,6 +1120,46 @@ PrefabInstance:
         type: 3}
       propertyPath: foo.b
       value: 0.757464
+      objectReference: {fileID: 0}
+    - target: {fileID: 7581623538879909788, guid: 24c462d84f3706b41bef1d0eee1a7a4e,
+        type: 3}
+      propertyPath: m_VertexStreams.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7581623538879909788, guid: 24c462d84f3706b41bef1d0eee1a7a4e,
+        type: 3}
+      propertyPath: m_UseCustomVertexStreams
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7581623538879909788, guid: 24c462d84f3706b41bef1d0eee1a7a4e,
+        type: 3}
+      propertyPath: m_VertexStreams.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7581623538879909788, guid: 24c462d84f3706b41bef1d0eee1a7a4e,
+        type: 3}
+      propertyPath: m_VertexStreams.Array.data[2]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 395784330151283631, guid: 24c462d84f3706b41bef1d0eee1a7a4e,
+        type: 3}
+      propertyPath: ShapeModule.alignToDirection
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 395784330151283631, guid: 24c462d84f3706b41bef1d0eee1a7a4e,
+        type: 3}
+      propertyPath: ShapeModule.m_Position.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 395784330151283631, guid: 24c462d84f3706b41bef1d0eee1a7a4e,
+        type: 3}
+      propertyPath: ShapeModule.m_Position.x
+      value: -2.94
+      objectReference: {fileID: 0}
+    - target: {fileID: 395784330151283631, guid: 24c462d84f3706b41bef1d0eee1a7a4e,
+        type: 3}
+      propertyPath: ShapeModule.m_Position.y
+      value: -1.56
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24c462d84f3706b41bef1d0eee1a7a4e, type: 3}
