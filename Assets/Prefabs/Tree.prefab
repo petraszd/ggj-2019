@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7594975422220594943}
   - component: {fileID: 7564965962571806202}
   - component: {fileID: 4003827134391772661}
+  - component: {fileID: 5431373557823647391}
   m_Layer: 0
   m_Name: Tree
   m_TagString: Tree
@@ -65,11 +66,11 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.003502496, y: 0.06384099}
-  m_Size: {x: 1.0088078, y: 0.48985326}
+  m_Size: {x: 2.11, y: 1.57}
   m_Direction: 1
 --- !u!114 &4003827134391772661
 MonoBehaviour:
@@ -87,6 +88,17 @@ MonoBehaviour:
   EnemyControlledColor: {r: 0.9622642, g: 0.2886887, b: 0.15886435, a: 1}
   NeutralColor: {r: 1, g: 1, b: 1, a: 1}
   PlayerControlledColor: {r: 0.8439166, g: 1, b: 0.7783019, a: 1}
+--- !u!210 &5431373557823647391
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5572088190685856608}
+  m_Enabled: 1
+  m_SortingLayerID: 460873763
+  m_SortingLayer: 3
+  m_SortingOrder: 0
 --- !u!1001 &5935108851459443928
 PrefabInstance:
   m_ObjectHideFlags: 0

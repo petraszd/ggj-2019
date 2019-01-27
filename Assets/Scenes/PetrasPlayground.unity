@@ -191,7 +191,7 @@ PrefabInstance:
     - target: {fileID: 6059268782556907122, guid: f688a9c18ee4b44b9b5be31110584553,
         type: 3}
       propertyPath: m_Name
-      value: PathManager
+      value: Path_Manager
       objectReference: {fileID: 0}
     - target: {fileID: 6059268782556907123, guid: f688a9c18ee4b44b9b5be31110584553,
         type: 3}
@@ -248,6 +248,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3897441589292997757, guid: f688a9c18ee4b44b9b5be31110584553,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6ca1aa909fa6445bc8defcc29d053752,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f688a9c18ee4b44b9b5be31110584553, type: 3}
 --- !u!1001 &1755690870285522598
@@ -265,12 +271,12 @@ PrefabInstance:
     - target: {fileID: 1755690869191686052, guid: d6d27818378a144fb8dd54313e46ff46,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.91
       objectReference: {fileID: 0}
     - target: {fileID: 1755690869191686052, guid: d6d27818378a144fb8dd54313e46ff46,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -11.46
       objectReference: {fileID: 0}
     - target: {fileID: 1755690869191686052, guid: d6d27818378a144fb8dd54313e46ff46,
         type: 3}
@@ -334,12 +340,12 @@ PrefabInstance:
     - target: {fileID: 4093181751127692520, guid: 618d7d55a9be64ace91517303402f53e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.39
+      value: -1.12
       objectReference: {fileID: 0}
     - target: {fileID: 4093181751127692520, guid: 618d7d55a9be64ace91517303402f53e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.93
+      value: -11.65
       objectReference: {fileID: 0}
     - target: {fileID: 4093181751127692520, guid: 618d7d55a9be64ace91517303402f53e,
         type: 3}
@@ -400,15 +406,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: Leash
       objectReference: {fileID: 0}
+    - target: {fileID: 6925037998350710010, guid: 6aa1bd6513fb04f3fb479375423fd48f,
+        type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6925037998350710013, guid: 6aa1bd6513fb04f3fb479375423fd48f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.55
       objectReference: {fileID: 0}
     - target: {fileID: 6925037998350710013, guid: 6aa1bd6513fb04f3fb479375423fd48f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -10.61
       objectReference: {fileID: 0}
     - target: {fileID: 6925037998350710013, guid: 6aa1bd6513fb04f3fb479375423fd48f,
         type: 3}

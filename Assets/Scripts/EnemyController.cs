@@ -15,27 +15,25 @@ public class EnemyController : MonoBehaviour
 
     float DistanceToOtherTrees;
 
-    TreeManager TreeManagerCode;
-    GameObject TreeManagerGO;
-
     Vector2 MoveDir;
     Vector2 MoveDirOffset;
     Vector2 MoveDirAfterTarget;
 
     private Rigidbody2D RB;
+    private TreeManager TreeManagerCode;
 
     void Start()
     {
+        TreeManagerCode = TreeManager.GetInstance();
+
         RB = gameObject.GetComponent<Rigidbody2D>();
-        TreeManagerGO = GameObject.FindGameObjectWithTag("Tree Manager");
-        TreeManagerCode = TreeManagerGO.GetComponent<TreeManager>();
-        if (TreeManagerCode.TreesForEnemies.Count != 0)
+        if (TreeManagerCode.IsTreeUncotrolledByEnemy())
         {
-            Target = TreeManagerCode.TreesForEnemies[Random.Range(0, TreeManagerCode.TreesForEnemies.Count)];
+            Target = TreeManagerCode.GetRandomTreeTransformUncontrolledByEnemy();
             MoveDir = RB.position - (Vector2)Target.position;
         }
     }
-    
+
     void Update()
     {
         if (Mathf.Abs(RB.position.x) > 20 || Mathf.Abs(RB.position.y) > 15)
@@ -50,7 +48,7 @@ public class EnemyController : MonoBehaviour
                 DistanceToOtherTrees = 1000;
                 foreach (Transform t in TreeManagerCode.Trees)
                 {
-                    if (Vector2.Distance(RB.position, t.position) < Vector2.Distance(RB.position, Target.position) && Vector2.Distance(RB.position, t.position) < DistanceToOtherTrees && Vector2.Distance(RB.position, t.position) < TreeSenseRadius && t.GetComponent<TreeController>().Owner != -1)
+                    if (Vector2.Distance(RB.position, t.position) < Vector2.Distance(RB.position, Target.position) && Vector2.Distance(RB.position, t.position) < DistanceToOtherTrees && Vector2.Distance(RB.position, t.position) < TreeSenseRadius && t.GetComponent<TreeController>().Owner != TreeOwnerType.Enemy)
                     {
                         AdditionalTarget = t;
                         DistanceToOtherTrees = Vector2.Distance(RB.position, t.position);
@@ -74,7 +72,7 @@ public class EnemyController : MonoBehaviour
                     AdditionalTarget = null;
                 }
             }
-            else if (Target.GetComponent<TreeController>().Owner == -1)
+            else if (Target.GetComponent<TreeController>().Owner == TreeOwnerType.Enemy)
             {
                 /// Go away
                 RB.MovePosition(-MoveDirAfterTarget.normalized * MoveSpeed * Time.deltaTime);
@@ -90,8 +88,12 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
+        if (RB == null) {
+            return;
+        }
+
         /// Tree sense circle
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(RB.position, TreeSenseRadius);
@@ -133,7 +135,7 @@ public class EnemyController : MonoBehaviour
             MoveDir = transform.position - Target.position;
         }
     }
-    
+
     void Update()
     {
         if (Mathf.Abs(transform.position.x) > 20 || Mathf.Abs(transform.position.y) > 15)

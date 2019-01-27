@@ -6,15 +6,15 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public Text TreeAmountText;
-    public GameObject TreeManagerGO;
+    public TreeManager TreeManagerCode;
 
     void Start()
     {
-        TreeManagerGO = GameObject.FindGameObjectWithTag("Tree Manager");
+        TreeManagerCode = TreeManager.GetInstance();
     }
-    
+
     void Update()
     {
-        TreeAmountText.text = TreeManagerGO.GetComponent<TreeManager>().TreesForEnemies.Count.ToString() + "/" + TreeManagerGO.GetComponent<TreeManager>().Trees.Length.ToString();
+        TreeAmountText.text = TreeManagerCode.GetNumberOfEnemyTrees().ToString() + "/" + TreeManagerCode.GetTotalNumberOfTrees().ToString();
     }
 }

@@ -6,6 +6,10 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class PlayerDogController : MonoBehaviour
 {
+    public delegate void EventPlayerDogPulled();
+    public static event EventPlayerDogPulled OnPlayerDogPulled;
+
+    private static YieldInstruction PISS_TIMER = new WaitForSeconds(1.0f);
     private static string ANIM_BLEND_IDLE_RUNNING = "Blend_Idle_Running";
     private static float RATIO_WHEN_RUNNING_IN = 0.3f;
     private static float STAND_STILL_EPSILON = 0.2f;
@@ -14,7 +18,10 @@ public class PlayerDogController : MonoBehaviour
     public GirlController m_girl = null;
     public float m_radius = 2.0f;
     public float m_speed = 1.0f;
+
+    [HeaderAttribute("Child Objects")]
     public Transform m_spritesTransform;
+    public ParticleSystem m_particles;
 
     private Rigidbody2D m_girlRigidbody;
     private Rigidbody2D m_rigidbody;
@@ -22,11 +29,23 @@ public class PlayerDogController : MonoBehaviour
     private Vector2 m_target;
     private Camera m_camera;
     private bool m_isRunning;
+    private bool m_isPissing;
     private float m_runningBlendValue = 0.0f;
+    private TreeManager m_treeManager;
 
     public float Radius
     {
         get { return m_radius; }
+    }
+
+    void OnEnable()
+    {
+        TreeManager.OnTreeMarkedByPlayer += OnStartPissingOnTree;
+    }
+
+    void OnDisable()
+    {
+        TreeManager.OnTreeMarkedByPlayer -= OnStartPissingOnTree;
     }
 
     void Awake()
@@ -34,6 +53,7 @@ public class PlayerDogController : MonoBehaviour
         m_rigidbody = GetComponent<Rigidbody2D>();
         m_animator = GetComponent<Animator>();
         m_isRunning = false;
+        m_isPissing = false;
     }
 
     void Start()
@@ -45,6 +65,10 @@ public class PlayerDogController : MonoBehaviour
         Debug.Assert(m_girl != null);
         m_girlRigidbody = m_girl.GetComponent<Rigidbody2D>();
         m_camera = Camera.main;
+
+        m_target = m_girlRigidbody.position + Vector2.right * m_radius * 0.5f;
+
+        m_treeManager = TreeManager.GetInstance();
     }
 
     void Update()
@@ -77,6 +101,10 @@ public class PlayerDogController : MonoBehaviour
                 OnStopRunning();
             }
         }
+
+        if (m_isRunning) {
+            UpdateSpritesScaleX();
+        }
     }
 
     void UpdateAnimatorBlendTrees()
@@ -92,11 +120,12 @@ public class PlayerDogController : MonoBehaviour
 
     void HandlePointInput(Vector2 screenPosition)
     {
+        if (m_isPissing) {
+            return;
+        }
         Vector2 pos = m_camera.ScreenToWorldPoint(screenPosition);
 
-        if (IsWithinRadius(pos)) {
-            m_target = pos;
-        }
+        m_target = pos;
     }
 
     Vector2 CalculateRealTarget()
@@ -104,10 +133,11 @@ public class PlayerDogController : MonoBehaviour
         Vector2 girlPos = m_girlRigidbody.position;
         Vector2 dogPos = m_rigidbody.position;
 
-        if (!IsWithinRadius()) {
+        if (!m_isPissing && !IsWithinRadius()) {
             Vector2 direction = girlPos - dogPos;
             direction.Normalize();
 
+            EmitPlayerDogPulled();
             return girlPos - direction * (m_radius * (1.0f - RATIO_WHEN_RUNNING_IN));
         }
 
@@ -117,7 +147,52 @@ public class PlayerDogController : MonoBehaviour
     void OnStartRunning()
     {
         m_runningBlendValue = 0.0f;
+    }
 
+    void OnStopRunning()
+    {
+        m_runningBlendValue = 1.0f;
+    }
+
+    void OnStartPissingOnTree(Vector2 treePosition, int treeIndex)
+    {
+        StartCoroutine(StartPissing(treePosition, treeIndex));
+    }
+
+    IEnumerator StartPissing(Vector2 treePosition, int treeIndex)
+    {
+        m_target = treePosition;
+
+        m_isPissing = true;
+        m_treeManager.LockTree(treeIndex);
+        m_girl.IsWaiting = true;
+
+        while (true) {
+            yield return null;
+            if (!m_isRunning) {
+                break;
+            }
+        }
+
+        m_animator.SetBool("Is_Pissing", true);
+        m_particles.Play();
+
+        yield return PISS_TIMER;
+        m_girl.IsWaiting = false;
+        m_treeManager.UnlockTree(treeIndex);
+        m_animator.SetBool("Is_Pissing", false);
+        m_isPissing = false;
+    }
+
+    void EmitPlayerDogPulled()
+    {
+        if (OnPlayerDogPulled != null) {
+            OnPlayerDogPulled();
+        }
+    }
+
+    void UpdateSpritesScaleX()
+    {
         Vector2 current = m_rigidbody.position;
         Vector2 next = m_target;
 
@@ -130,11 +205,6 @@ public class PlayerDogController : MonoBehaviour
             scale.x = Mathf.Abs(scale.x);
             m_spritesTransform.localScale = scale;
         }
-    }
-
-    void OnStopRunning()
-    {
-        m_runningBlendValue = 1.0f;
     }
 
     bool IsWithinRadius()
