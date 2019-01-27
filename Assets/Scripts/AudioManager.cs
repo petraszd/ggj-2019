@@ -8,6 +8,7 @@ public class AudioManager : MonoBehaviour
     public AudioSource fxSource;
 
     public AudioClip PissClip;
+    public AudioClip BarkClip;
 
     public float pitchRandomness = 0.2f;
     private float originalFXPitch;
@@ -43,6 +44,21 @@ public class AudioManager : MonoBehaviour
     private void InstancePlayPiss()
     {
         PlayFxClip(PissClip);
+    }
+
+    // Bark
+    public static void PlayBark()
+    {
+        if (instance == null)
+        {
+            return;
+        }
+        instance.InstancePlayBark();
+    }
+
+    private void InstancePlayBark()
+    {
+        PlayFxClip(BarkClip);
     }
 
     private void PlayFxClip(AudioClip clip)

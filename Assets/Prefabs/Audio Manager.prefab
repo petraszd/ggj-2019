@@ -48,6 +48,7 @@ MonoBehaviour:
   musicSource: {fileID: 7264598849423930671}
   fxSource: {fileID: 7264598849423930670}
   PissClip: {fileID: 8300000, guid: 36b4ef64809e6184a970da1a2bceb48b, type: 3}
+  BarkClip: {fileID: 8300000, guid: 6d34c6b8f9cf1a04cba9118ea4a832ea, type: 3}
   pitchRandomness: 0.2
 --- !u!82 &7264598849423930671
 AudioSource:
