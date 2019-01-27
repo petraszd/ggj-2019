@@ -22,6 +22,7 @@ public class PlayerDogController : MonoBehaviour
     [HeaderAttribute("Child Objects")]
     public Transform m_spritesTransform;
     public ParticleSystem m_particles;
+    public Transform m_targetIcon;
 
     private Rigidbody2D m_girlRigidbody;
     private Rigidbody2D m_rigidbody;
@@ -54,6 +55,9 @@ public class PlayerDogController : MonoBehaviour
         m_animator = GetComponent<Animator>();
         m_isRunning = false;
         m_isPissing = false;
+
+        // Hack to prevent 2d fighting
+        m_targetIcon.parent = null;
     }
 
     void Start()
@@ -74,6 +78,8 @@ public class PlayerDogController : MonoBehaviour
     void Update()
     {
         UpdateAnimatorBlendTrees();
+
+        m_targetIcon.position = m_target;
 
         if (Input.GetMouseButtonDown(0)) {
             HandlePointInput(Input.mousePosition);
