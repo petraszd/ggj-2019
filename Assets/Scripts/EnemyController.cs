@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     private static float EPSILON_NEAR_TREE_PISSING = 0.1f;
+    private static float NEAR_TREE = 7.0f;
     private static YieldInstruction PISS_TIMER = new WaitForSeconds(1.0f);
 
     public int MoveSpeed;
@@ -44,7 +45,6 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         TreeManagerCode = TreeManager.GetInstance();
-        BeginRunning();
     }
 
     void FixedUpdate()
@@ -102,7 +102,9 @@ public class EnemyController : MonoBehaviour
 
     private void OnTreeMarkedByEnemy(Vector2 treePos, int index)
     {
-        StartCoroutine(StartPissing(treePos, index));
+        if (Vector2.Distance(treePos, RB.position) < NEAR_TREE) {
+            StartCoroutine(StartPissing(treePos, index));
+        }
     }
 
     IEnumerator StartPissing(Vector2 treePos, int index)
