@@ -19,6 +19,9 @@ public class TreeController : MonoBehaviour
     {
         m_treeManager = TreeManager.GetInstance();
         GlowSpriteRenderer = transform.GetChild(1).GetComponent<SpriteRenderer>();
+
+        // Hack to prevent 2d z axis fighting
+        GlowSpriteRenderer.GetComponent<Transform>().parent = null;
     }
 
     void OnTriggerEnter2D (Collider2D col)
