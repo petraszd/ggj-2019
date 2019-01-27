@@ -5,14 +5,22 @@ using UnityEngine;
 public class TreeManager : MonoBehaviour
 {
     public delegate void EventTreeMarkedByDog(Vector2 treePos, int index);
+    public delegate void EventTreeNumbersChanged(int nTotal, int nEnemies, int nPlayer);
 
     public static event EventTreeMarkedByDog OnTreeMarkedByPlayer;
     public static event EventTreeMarkedByDog OnTreeMarkedByEnemy;
+    public static event EventTreeNumbersChanged OnTreeNumbersChanged;
 
     private static TreeManager m_instance;
 
+    public int m_numToWin;
     public Transform[] Trees;
     private TreeController[] TreeControllers;
+
+    public int NumToWin
+    {
+        get { return m_numToWin; }
+    }
 
     public static TreeManager GetInstance()
     {
@@ -39,6 +47,11 @@ public class TreeManager : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        EmitTreeNumbersChanged();
+    }
+
     void Update()
     {
         if (!IsTreeUncotrolledByEnemy())
@@ -61,12 +74,22 @@ public class TreeManager : MonoBehaviour
         }
     }
 
+    void EmitTreeNumbersChanged()
+    {
+        if (OnTreeNumbersChanged != null) {
+            OnTreeNumbersChanged(
+                    GetTotalNumberOfTrees(),
+                    GetNumberOfEnemyTrees(),
+                    GetNumberOfPlayerTrees());
+        }
+    }
 
     public void MarkTreeByEnemy(int index)
     {
         TreeControllers[index].Owner = TreeOwnerType.Enemy;
         Vector2 treePos = Trees[index].position;
         EmitTreeMarkedByEnemy(treePos, index);
+        EmitTreeNumbersChanged();
     }
 
     public void MarkByPlayer(int index)
@@ -74,6 +97,7 @@ public class TreeManager : MonoBehaviour
         TreeControllers[index].Owner = TreeOwnerType.Player;
         Vector2 treePos = Trees[index].position;
         EmitTreeMarkedByPlayer(treePos, index);
+        EmitTreeNumbersChanged();
     }
 
     public void LockTree(int index)
@@ -112,9 +136,19 @@ public class TreeManager : MonoBehaviour
 
     public int GetNumberOfEnemyTrees()
     {
+        return GetNumberOfTreesByType(TreeOwnerType.Enemy);
+    }
+
+    public int GetNumberOfPlayerTrees()
+    {
+        return GetNumberOfTreesByType(TreeOwnerType.Player);
+    }
+
+    private int GetNumberOfTreesByType(TreeOwnerType type)
+    {
         int result = 0;
         for (int i = 0; i < TreeControllers.Length; ++i) {
-            if (TreeControllers[i].Owner == TreeOwnerType.Enemy) {
+            if (TreeControllers[i].Owner == type) {
                 result++;
             }
         }
