@@ -34,7 +34,7 @@ public class EnemiesSpawner : MonoBehaviour
         }
         m_currentIndex = 0;
 
-        m_timeRemaining = Cooldown * m_enemyDogs.Length + 5.0f;
+        m_timeRemaining = Cooldown * (m_enemyDogs.Length + 1) + 5.0f;
         StartCoroutine(CountDownToEnd());
     }
 
