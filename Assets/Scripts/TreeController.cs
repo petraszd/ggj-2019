@@ -31,12 +31,16 @@ public class TreeController : MonoBehaviour
         switch (Tag)
         {
             case "Enemy":
-                m_treeManager.MarkTreeByEnemy(Index);
-                Owner = TreeOwnerType.Enemy;
+                if (Owner != TreeOwnerType.Enemy) {
+                    Owner = TreeOwnerType.Enemy;
+                    m_treeManager.MarkTreeByEnemy(Index);
+                }
                 break;
             case "Player":
-                m_treeManager.MarkByPlayer(Index);
-                Owner = TreeOwnerType.Player;
+                if (Owner != TreeOwnerType.Player) {
+                    Owner = TreeOwnerType.Player;
+                    m_treeManager.MarkByPlayer(Index);
+                }
                 break;
         }
     }
