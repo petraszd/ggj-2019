@@ -26,10 +26,7 @@ public class TreeManager : MonoBehaviour
         } else if (m_instance != this) {
             Destroy(gameObject);
         }
-    //}
 
-    //void Start()
-    //{
         GameObject[] TreesGO = GameObject.FindGameObjectsWithTag("Tree");
         Trees = new Transform[TreesGO.Length];
         TreeControllers = new TreeController[TreesGO.Length];
