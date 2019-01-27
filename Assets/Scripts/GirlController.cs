@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Animator))]
 public class GirlController : MonoBehaviour
 {
     private static float MIN_DISTANCE_BEFORE_CHOOSING_NEW_DIRECTION = 0.2f;
@@ -19,17 +20,22 @@ public class GirlController : MonoBehaviour
 
     private Rigidbody2D m_rigidbody;
     private Rigidbody2D m_dogRigidbody;
+    private Animator m_animator;
 
     public bool IsWaiting
     {
         get { return m_isWaiting; }
-        set { m_isWaiting = value; }
+        set {
+            m_isWaiting = value;
+            m_animator.SetBool("Is_Waiting", m_isWaiting);
+        }
     }
 
     void Awake()
     {
         m_isWaiting = false;
         m_rigidbody = GetComponent<Rigidbody2D>();
+        m_animator = GetComponent<Animator>();
     }
 
     void Start()

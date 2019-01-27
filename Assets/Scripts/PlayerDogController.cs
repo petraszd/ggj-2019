@@ -6,6 +6,9 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class PlayerDogController : MonoBehaviour
 {
+    public delegate void EventPlayerDogPulled();
+    public static event EventPlayerDogPulled OnPlayerDogPulled;
+
     private static YieldInstruction PISS_TIMER = new WaitForSeconds(1.0f);
     private static string ANIM_BLEND_IDLE_RUNNING = "Blend_Idle_Running";
     private static float RATIO_WHEN_RUNNING_IN = 0.3f;
@@ -122,9 +125,7 @@ public class PlayerDogController : MonoBehaviour
         }
         Vector2 pos = m_camera.ScreenToWorldPoint(screenPosition);
 
-        if (IsWithinRadius(pos)) {
-            m_target = pos;
-        }
+        m_target = pos;
     }
 
     Vector2 CalculateRealTarget()
@@ -136,6 +137,7 @@ public class PlayerDogController : MonoBehaviour
             Vector2 direction = girlPos - dogPos;
             direction.Normalize();
 
+            EmitPlayerDogPulled();
             return girlPos - direction * (m_radius * (1.0f - RATIO_WHEN_RUNNING_IN));
         }
 
@@ -180,6 +182,13 @@ public class PlayerDogController : MonoBehaviour
         m_treeManager.UnlockTree(treeIndex);
         m_animator.SetBool("Is_Pissing", false);
         m_isPissing = false;
+    }
+
+    void EmitPlayerDogPulled()
+    {
+        if (OnPlayerDogPulled != null) {
+            OnPlayerDogPulled();
+        }
     }
 
     void UpdateSpritesScaleX()
