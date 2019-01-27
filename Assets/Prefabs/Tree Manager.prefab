@@ -43,5 +43,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a97dea2d395c974ba2f647a304dfd7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TreesGO: []
+  m_numToWin: 5
   Trees: []
