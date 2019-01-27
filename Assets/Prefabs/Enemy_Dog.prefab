@@ -731,10 +731,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adb7184909e4f8249aca102d56b67b1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 0}
   AdditionalTarget: {fileID: 0}
   MoveSpeed: 3
   StoppingDistance: 0.5
   TreeSenseRadius: 2
-  MinDistToTree: 1
-  MaxDistToTree: 1.5
+  MinDistToTree: 0.05
+  MaxDistToTree: 0.1

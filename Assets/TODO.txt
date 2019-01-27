@@ -1,6 +1,7 @@
 - Win Scene
 - Lose Scene
 - HUD
+- Camera, kad neužeitų
 - Music
 - Audio
 - Enemy riging
