@@ -107,6 +107,7 @@ public class EnemyController : MonoBehaviour
 
     IEnumerator StartPissing(Vector2 treePos, int index)
     {
+        AudioManager.PlayPiss();
         m_target = treePos;
         TreeManagerCode.LockTree(index);
         m_isPissing = true;

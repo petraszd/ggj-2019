@@ -7,7 +7,6 @@ public class MainCameraController : MonoBehaviour
 {
     //public CinemachineVirtualCamera m_virtualCamera;
     public Rect CameraLimits;
-    public Texture _Texture;
     private Transform Girl;
 
     // Start is called before the first frame update
@@ -56,10 +55,5 @@ public class MainCameraController : MonoBehaviour
         Y = Mathf.Min(CameraLimits.yMax, Girl.position.y);
         */
         transform.position = new Vector3(X, Y, 0);
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawGUITexture(CameraLimits, _Texture);
     }
 }

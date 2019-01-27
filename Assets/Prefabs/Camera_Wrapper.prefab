@@ -50,7 +50,7 @@ MonoBehaviour:
     y: -4.9
     width: 16.5
     height: 9.5
-  _Texture: {fileID: 10916, guid: 0000000000000000f000000000000000, type: 0}
+  _Texture: {fileID: 0}
 --- !u!1 &3816119505407685737
 GameObject:
   m_ObjectHideFlags: 0

@@ -161,6 +161,7 @@ public class PlayerDogController : MonoBehaviour
 
     IEnumerator StartPissing(Vector2 treePosition, int treeIndex)
     {
+        AudioManager.PlayPiss();
         m_target = treePosition;
 
         m_isPissing = true;
