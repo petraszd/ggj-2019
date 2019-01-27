@@ -36,7 +36,7 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
-        if (Mathf.Abs(RB.position.x) > 20 || Mathf.Abs(RB.position.y) > 15)
+        if (Mathf.Abs(RB.position.x) > 40 || Mathf.Abs(RB.position.y) > 30)
         {
             Destroy(gameObject);
         }
