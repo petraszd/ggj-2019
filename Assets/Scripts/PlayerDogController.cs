@@ -84,7 +84,10 @@ public class PlayerDogController : MonoBehaviour
         if (Input.GetMouseButtonDown(0)) {
             HandlePointInput(Input.mousePosition);
         }
-        // TODO: touch detection
+        for (int i = 0; i < Input.touches.Length; ++i) {
+            Touch t = Input.touches[i];
+            HandlePointInput(t.position);
+        }
     }
 
     void FixedUpdate()
